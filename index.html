@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Курс валют</title>
+</head>
+
+<body>
+    <form action="exchange_rate" method="post">
+        <p>Выберите дату:<input type="date" name="calendar" value="2021-01-01" max="2021-01-15" min="2020-12-15">
+            <input type="submit" value="Узнать курс"></p>
+    </form>
+    <div id="DATA">Курс на: </div>
+    <div id="USD">USD - 00,0000 руб.</div>
+    <div id="EUR">EUR - 00,0000 руб.</div>
+
+    <script type="text/javascript">
+
+        function zero_first_format(value){
+            if (value < 10) {
+                value = '0' + value;
+            }
+            return value;
+        }
+
+        function date_time() {
+            let current_datetime = new Date();
+            let day = zero_first_format(current_datetime.getDate());
+            let month = zero_first_format(current_datetime.getMonth()+1);
+            let year = zero_first_format(current_datetime.getFullYear());
+
+            return day+'.'+month+'.'+year+'.';
+        }
+
+        document.getElementById('DATA').innerHTML += date_time();
+    </script>
+    <script>
+        let USD = document.getElementById('USD'),
+            EUR = document.getElementById('EUR');
+
+        function CBR_XML_Daily_Ru(rates) {
+            var USDrate = rates.Valute.USD.Value.toFixed(4).replace('.', ',');
+            USD.innerHTML = USD.innerHTML.replace('00,0000', USDrate);
+
+            var EURrate = rates.Valute.EUR.Value.toFixed(4).replace('.', ',');
+            EUR.innerHTML = EUR.innerHTML.replace('00,0000', EURrate);
+        }
+
+    </script>
+    <script src="//www.cbr-xml-daily.ru/daily_jsonp.js" async></script>
+</body>
+</html>
