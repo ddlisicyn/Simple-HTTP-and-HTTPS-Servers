@@ -30,7 +30,7 @@
             let month = zero_first_format(current_datetime.getMonth()+1);
             let year = zero_first_format(current_datetime.getFullYear());
 
-            return day+'.'+month+'.'+year+'.';
+            return day+'.'+month+'.'+year;
         }
 
         document.getElementById('DATA').innerHTML += date_time();
@@ -40,10 +40,10 @@
             EUR = document.getElementById('EUR');
 
         function CBR_XML_Daily_Ru(rates) {
-            var USDrate = rates.Valute.USD.Value.toFixed(4).replace('.', ',');
+            let USDrate = rates.Valute.USD.Value.toFixed(4).replace('.', ',');
             USD.innerHTML = USD.innerHTML.replace('00,0000', USDrate);
 
-            var EURrate = rates.Valute.EUR.Value.toFixed(4).replace('.', ',');
+            let EURrate = rates.Valute.EUR.Value.toFixed(4).replace('.', ',');
             EUR.innerHTML = EUR.innerHTML.replace('00,0000', EURrate);
         }
 
